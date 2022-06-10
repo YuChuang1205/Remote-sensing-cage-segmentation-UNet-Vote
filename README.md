@@ -5,3 +5,4 @@ The '1024' folder is the model training and testing code with an image size of 1
 The'vote' folder is for voting on the results of the three-size segmentation.  
 
 
+
