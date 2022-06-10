@@ -1,7 +1,7 @@
 
 #coding=gbk
 '''
-Created on 2020Äê3ÔÂ7ÈÕ
+Created on 2020å¹´3æœˆ7æ—¥
 
 @author: 17720
 '''
@@ -11,24 +11,8 @@ import numpy as np
 
 import sys
 import time
-class Logger(object):
-    def __init__(self, fileN="Default.log"):
-        self.terminal = sys.stdout
-        self.log = open(fileN, "a",encoding='utf-8')    
- 
-    def write(self, message):
-        self.terminal.write(message)
-        self.log.write(message)
- 
-    def flush(self):
-        pass
+
 root_path = os.path.abspath('.')
-time1 = time.strftime('%Y%m%d%H%M',time.localtime(time.time()))
-new_name = "logs/test_result2"+time1+".txt"
-
-sys.stdout = Logger(os.path.join(root_path,new_name))
-
-
 
 
 
@@ -47,7 +31,7 @@ def cal_iou(image1,image2):
 
 
 
-#×¼È·ÂÊ
+#å‡†ç¡®ç‡
 def cal_acc_acc(image1,image2):
     h,w = image1.shape
     area = h*w
@@ -64,7 +48,7 @@ def cal_acc_acc(image1,image2):
 
 
 
-#¾«È·ÂÊ
+#ç²¾ç¡®ç‡
 def cal_acc(image1,image2):
     image1 = image1/255
     image2 = image2/255
@@ -83,7 +67,7 @@ def cal_acc(image1,image2):
     return acc
 
 
-#ÕÙ»ØÂÊ
+#å¬å›ç‡
 def cal_recall(image1,image2):
     image1 = image1/255
     image2 = image2/255
@@ -100,7 +84,7 @@ def cal_recall(image1,image2):
     recall = count_2 / count_1
     return recall
 
-#Æ½¾ùÏà¶ÔÎó²î
+#å¹³å‡ç›¸å¯¹è¯¯å·®
 def relative_loss(image1,image2):
     image1 = image1/255
     image2 = image2/255
@@ -131,8 +115,8 @@ recall_list = np.zeros(len(list1))
 rel_loss_list = np.zeros(len(list1))
 for i in range(len(list1)):
     print("-------------------------------------------------")
-    print("¶Ô±ÈµÄÍ¼Æ¬Ãû£º%s" %(list1[i]))
-    print("²âÊÔµÄÍ¼Æ¬Ãû£º%s" %(list2[i]))
+    print("å¯¹æ¯”çš„å›¾ç‰‡åï¼š%s" %(list1[i]))
+    print("æµ‹è¯•çš„å›¾ç‰‡åï¼š%s" %(list2[i]))
     image1 = cv2.imread(os.path.join(pic_path,list1[i]),cv2.IMREAD_GRAYSCALE)
     image2 = cv2.imread(os.path.join(pic_path2,list2[i]),cv2.IMREAD_GRAYSCALE)
     #print(image2)
@@ -150,11 +134,11 @@ for i in range(len(list1)):
     recall_list[i] = recall
     rel_loss_list[i] = rel_loss
     
-    print("²âÊÔµÄÍ¼Æ¬Îª%s£¬ÆäIOUÎª£º%f" %(list2[i],iou))
-    print("²âÊÔµÄÍ¼Æ¬Îª%s£¬Æä×¼È·ÂÊÎª£º%f" %(list2[i],acc1))
-    print("²âÊÔµÄÍ¼Æ¬Îª%s£¬Æä¾«È·ÂÊÎª£º%f" %(list2[i],acc2))
-    print("²âÊÔµÄÍ¼Æ¬Îª%s£¬ÆäÕÙ»ØÂÊÎª£º%f" %(list2[i],recall))
-    print("²âÊÔµÄÍ¼Æ¬Îª%s£¬ÆäÏà¶ÔÎó²îÎª£º%f" %(list2[i],rel_loss))
+    print("æµ‹è¯•çš„å›¾ç‰‡ä¸º%sï¼Œå…¶IOUä¸ºï¼š%f" %(list2[i],iou))
+    print("æµ‹è¯•çš„å›¾ç‰‡ä¸º%sï¼Œå…¶å‡†ç¡®ç‡ä¸ºï¼š%f" %(list2[i],acc1))
+    print("æµ‹è¯•çš„å›¾ç‰‡ä¸º%sï¼Œå…¶ç²¾ç¡®ç‡ä¸ºï¼š%f" %(list2[i],acc2))
+    print("æµ‹è¯•çš„å›¾ç‰‡ä¸º%sï¼Œå…¶å¬å›ç‡ä¸ºï¼š%f" %(list2[i],recall))
+    print("æµ‹è¯•çš„å›¾ç‰‡ä¸º%sï¼Œå…¶ç›¸å¯¹è¯¯å·®ä¸ºï¼š%f" %(list2[i],rel_loss))
     print("-------------------------------------------------")
 
 print(iou_list)
@@ -169,8 +153,8 @@ acc_mean2 = np.mean(acc_list2)
 recall_mean = np.mean(recall_list)
 rel_loss_mean = np.mean(rel_loss_list)
 
-print("mIOUÎª£º%f" %(iou_mean))
-print("Æ½¾ù×¼È·ÂÊÎª£º%f" %(acc_mean1))
-print("Æ½¾ù¾«È·ÂÊÎª£º%f" %(acc_mean2))
-print("Æ½¾ùÕÙ»ØÂÊÎª£º%f" %(recall_mean))
-print("Æ½¾ùÏà¶ÔÎó²îÎª£º%f" %(rel_loss_mean))
+print("mIOUä¸ºï¼š%f" %(iou_mean))
+print("å¹³å‡å‡†ç¡®ç‡ä¸ºï¼š%f" %(acc_mean1))
+print("å¹³å‡ç²¾ç¡®ç‡ä¸ºï¼š%f" %(acc_mean2))
+print("å¹³å‡å¬å›ç‡ä¸ºï¼š%f" %(recall_mean))
+print("å¹³å‡ç›¸å¯¹è¯¯å·®ä¸ºï¼š%f" %(rel_loss_mean))
